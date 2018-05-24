@@ -1,0 +1,76 @@
+
+windows下面
+1.查看python版本
+2.建虚拟环境 python -m venv hello_django_venv
+3.进入虚拟环境目录下面的scripts目录 执行activate命令
+4.在虚拟环境下安装django,   pip install django==(版本号)
+5.检查django版本, django-admin --version
+6.返回用户主目录  django-admin startproject hello-django 新建hello_django项目
+7.进入hello_django目录
+8.执行manage.py文件   python manage.py runserver
+9.创建子应用  python manage.py startapp hrs
+
+
+mac/linux
+mkdir hello_django
+cd hello_django/
+python3 -m venv hd_venv
+source hd_venv/bin/activate   激活虚拟环境
+python -m pip install --upgrade pip
+pip install django
+django-admin --version
+
+
+
+
+将python表格同步到数据库
+Python manage.py makemigrations hrs  生成迁移
+Python manage.py migrate  执行迁移
+
+设置admin页面用户名密码
+python manage.py createsuperuser
+
+
+
+在pycharm控制台实现增删改查
+python manage.py shell
+from hrs.models import Emp
+from hrs.models import Dept
+增加
+dept = Dept(dno='80', name='研发2部', location='杭州')
+dept.save()
+删除
+1.先获得行dept = Dept.objects.get(dno=80)或者(pk=80)
+2.再删除dept.delete()
+dept.save(
+修改
+1.先获得行dept = Dept.objects.get(dno=80)
+2.再修改 dept.name = ''
+dept.save()
+查询
+1.模糊查询
+Dept.objects.filter(name__contains='销售')查询带销售的职位
+Dept.objects.filter(name__icontains=' ')忽略大小写
+Dept.objects.filter(no__gt=30) 查询编号大于30的
+Dept.objects.filter(no__gte=30) 查询编号小于30的
+2.切片
+Dept.objects.all().order_by('-no')[0:3]查询编号最大的3个部门
+3.自己写SQL查询
+Dept.objects.raw('SQL语句')
+
+
+
+
+
+Django  从页面获取数据到views的方法
+request.method   获取请求方法(post/get)
+request.path     获取请求地址
+request.META     返回浏览器请求头字典 url?a=b&c=d
+request.GET	 返回url?后面的构造地址的字典
+request.POST	 获取表单信息 form
+通过url获取数据  在views的函数的参数request 后面增加参数,该参数
+要通过url里面用正则表达式获取.
+
+    
+
+
