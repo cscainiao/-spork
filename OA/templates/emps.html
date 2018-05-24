@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门</title>
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1 style="text-align: center; color: darkolivegreen">{{ dept_name }}员工信息</h1>
+    <hr>
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-8 column">
+                    {% if emps_list %}
+					<table id="dept" class="table table-hover table-bordered table-condensed">
+						<thead>
+							<tr>
+								<th>
+									员工编号
+								</th>
+								<th>
+									员工姓名
+								</th>
+								<th>
+									职位
+								</th>
+                                <th>
+                                    工资
+                                </th>
+								<th>
+									主管
+								</th>
+							</tr>
+                        {% for emp in emps_list %}
+                            <tr>
+								<th>
+									{{ emp.no }}
+								</th>
+								<th>
+									{{ emp.name }}
+								</th>
+								<th>
+									{{ emp.job }}
+								</th>
+                                <th>
+                                    {{ emp.sal }}
+                                </th>
+								<th>
+                                    {{ emp.mar }}
+								</th>
+							</tr>
+                        {% endfor %}
+						</thead>
+					</table>
+                    {% else %}
+                        <h3>此部门暂时没有员工</h3>
+                    {% endif %}
+                <a href="{% url 'depts' %}">返回部门列表</a>
+				</div>
+				<div class="col-md-4 column">
+					<dl>
+						<dt>
+							Description lists
+						</dt>
+						<dd>
+							A description list is perfect for defining terms.
+						</dd>
+						<dt>
+							Euismod
+						</dt>
+						<dd>
+							Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
+						</dd>
+						<dd>
+							Donec id elit non mi porta gravida at eget metus.
+						</dd>
+						<dt>
+							Malesuada porta
+						</dt>
+						<dd>
+							Etiam porta sem malesuada magna mollis euismod.
+						</dd>
+						<dt>
+							Felis euismod semper eget lacinia
+						</dt>
+						<dd>
+							Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(function () {
+            $('#dept thead tr:even').addClass('info');
+            $('#dept thead tr:odd').addClass('success');
+        });
+    </script>
+</body>
+</html>

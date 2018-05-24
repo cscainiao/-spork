@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>违章查询</title>
+    <style>
+        #one {
+            width: 200px;
+            margin: 0 auto;
+        }
+    </style>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1 style="text-align: center; color: darkolivegreen">车辆违章查询</h1>
+    <div id="one">
+        <form action="" method="post">
+{#            防止跨站身份伪造,还可防止重复提交表单以及重放攻击.随机生成令牌#}
+             {% csrf_token %}
+        <input type="search" name="chepai" placeholder="请输入你的车牌号" required>
+        <input type="submit" value="查询">
+        </form>
+    </div>
+    <hr>
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+            <table id="dept" class="table table-hover table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th>车牌号</th>
+                    <th>违章日期</th>
+                    <th>违章原因</th>
+                    <th>处罚方式</th>
+                    <th>是否处理</th>
+                </tr>
+                {% for car in cars %}
+                <tr>
+                    <th>{{ car.plate_number }}</th>
+                    <th>{{ car.date  }}</th>
+                    <th>{{ car.why}}</th>
+                    <th>{{ car.mode }}</th>
+                    {% if car.accept %}
+                    <th>已处理</th>
+                    {% else %}
+                    <th>未处理</th>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                </thead>
+            </table>
+		</div>
+	</div>
+</div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        $(function () {
+            $('#dept thead tr:even').addClass('info')
+            $('#dept thead tr:odd').addClass('success')
+            $('#one a').on('click',function () {
+                var b = $('#one input').val()
+                alert(b)
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <h1>{{ greeting }}</h1>
+    <h3>{{ current_time }}</h3>
+    <h3>今天推荐{{ num }}种水果是:</h3>
+    <hr>
+    <ul>
+        {% for fruit in fruits %}
+        <li>{{ fruit }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

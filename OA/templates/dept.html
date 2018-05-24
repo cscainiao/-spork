@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门</title>
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1 style="text-align: center; color: darkolivegreen">部门信息</h1>
+    <hr>
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-8 column">
+					<table id="dept" class="table table-hover table-bordered table-condensed">
+						<thead>
+							<tr>
+								<th>
+									部门名称
+								</th>
+								<th>
+									部门编号
+								</th>
+								<th>
+									部门所在地
+								</th>
+                                <th>
+                                    是否优秀
+                                </th>
+								<th>
+									操作
+								</th>
+							</tr>
+                        {% for dept in dept_list %}
+                            <tr>
+								<th>
+									<a href="{% url 'empsindept' dept.dno %}">{{ dept.name }}</a>
+								</th>
+								<th>
+									{{ dept.dno }}
+								</th>
+								<th>
+									{{ dept.location }}
+								</th>
+{#                                {% if dept.excellent %}#}
+{#                                <th>#}
+{#                                    <img src="/static/images/1.png" alt="">#}
+{#                                </th>#}
+{#                                {% else %}#}
+{#                                 <th>#}
+{#                                     #}
+{#                                 </th>#}
+{#                                {% endif %}#}
+                                <th>
+                                    {% if dept.excellent %}
+                                        <span>√</span>
+                                    {% else %}
+                                        <span>❎</span>
+                                    {% endif %}
+                                </th>
+								<th>
+{#                                    <a href="{% url 'ddel' dept.dno %}" class="btn btn-xs btn-warning">删除</a>#}
+                                    <a id="{{ dept.dno }}" href="javascript:void(0);" class="btn btn-xs btn-warning">删除</a>
+								</th>
+							</tr>
+                        {% endfor %}
+						</thead>
+					</table>
+				</div>
+				<div class="col-md-4 column">
+					<dl>
+						<dt>
+							Description lists
+						</dt>
+						<dd>
+							A description list is perfect for defining terms.
+						</dd>
+						<dt>
+							Euismod
+						</dt>
+						<dd>
+							Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
+						</dd>
+						<dd>
+							Donec id elit non mi porta gravida at eget metus.
+						</dd>
+						<dt>
+							Malesuada porta
+						</dt>
+						<dd>
+							Etiam porta sem malesuada magna mollis euismod.
+						</dd>
+						<dt>
+							Felis euismod semper eget lacinia
+						</dt>
+						<dd>
+							Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(function () {
+            $('#dept thead tr:even').addClass('info')
+            $('#dept thead tr:odd').addClass('success')
+            $('#dept a[id]').on('click', function (evt) {
+                var a = $(evt.target);
+                if (confirm('确定要删除吗')) {
+                    $.getJSON('/hrs/deldept/' + a.attr('id'), function (json) {
+                        if (json.code == 200) {
+                            a.parent().parent().remove()
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+</html>
