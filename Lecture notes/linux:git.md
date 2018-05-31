@@ -236,6 +236,26 @@ git merge <name>
 git push origin master
 ```
 
+hexo搭建个人博客
+
+```
+创建文件夹
+mkdir blog  
+cd blog  
+hexo init
+
+
+撰写博客
+hexo new post "我的第一篇博客"
+
+
+
+当你增加新的文章或者插件时，可以通过以下三个命令进行同步操作：
+hexo clean  
+hexo generate    /hexo g
+sudo hexo deploy  / hexo d
+```
+
 
 
 

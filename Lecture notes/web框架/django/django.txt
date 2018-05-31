@@ -52,7 +52,14 @@ dept.save()
 Dept.objects.filter(name__contains='销售')查询带销售的职位
 Dept.objects.filter(name__icontains=' ')忽略大小写
 Dept.objects.filter(no__gt=30) 查询编号大于30的
-Dept.objects.filter(no__gte=30) 查询编号小于30的
+Dept.objects.filter(no__gte=30) 查询编号大于等于30的
+
+__gt 大于
+__gte 大于等于
+__lt 小于
+__lte 小于等于
+
+
 2.切片
 Dept.objects.all().order_by('-no')[0:3]查询编号最大的3个部门
 3.自己写SQL查询
@@ -70,6 +77,13 @@ request.GET	 返回url?后面的构造地址的字典
 request.POST	 获取表单信息 form
 通过url获取数据  在views的函数的参数request 后面增加参数,该参数
 要通过url里面用正则表达式获取.
+
+
+
+用户身份标识(用户识别)
+url重写
+Cookie 请求头里面 在浏览器里面保留用户的一些数据,下次用户访问该网站时会自动识别这些数据
+隐藏域  表单里面
 
     
 
