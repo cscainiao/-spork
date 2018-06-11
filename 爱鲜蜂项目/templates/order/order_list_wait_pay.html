@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h3>待付款订单列表</h3>
+
+    <ul>
+        <!--订单信息展示-->
+            {% for i in user_orders %}
+            <li>
+                <a href="">订单号:{{ i.o_num }}</a>
+                <p><a href="{% url 'app:waitPay' i.id%}">确认付款</a></p>
+
+                        <!--展示商品的名称-->
+                        {% for j in i.ordergoodsmodel_set.all %}
+                        <li class="foo">
+                            <h6>{{ j.goods.productlongname }}</h6>
+                            <img style="height: 100px; width: 100px" src="{{ j.goods.productimg }}" alt="">
+                            <p>数量:{{ j.goods_num }}</p>
+
+                        </li>
+                        {% endfor %}
+                        <!--处理结束-->
+                <hr>
+            </li>
+            {% endfor %}
+        <!--订单处理结束-->
+    </ul>
+
+
+{% endblock %}
